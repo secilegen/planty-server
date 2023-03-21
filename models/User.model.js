@@ -10,13 +10,12 @@ const userSchema = new Schema(
     match: [/^\S+@\S+\.\S+$/, "Please use a valid email address"],
     trim: true,
   },
-  passwordHash: {
+  hashedPassword: {
     type: String,
-    required: [true, "Password is required"],
-    unique: true,
+    required: [true, "Password is required"]
   },
 
-IsCompany: {
+isCompany: {
 type: Boolean,
 required: [true, "User type is required"],
 },
