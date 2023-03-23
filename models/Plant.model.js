@@ -9,7 +9,7 @@ nickname: {
  
  sunlightPositioning: {
  type: String,
- required: [true, "Positioning for your plant is required"],
+ enum: ['Low', 'Moderate', 'High']
  },
  
  image: {
@@ -17,7 +17,8 @@ nickname: {
  },
  
  plantHeight: {
- type: Number
+ type: Number,
+ required: [true, "Height is required in order the calculate right amount of water"]
  },
  
  birthDate: {
@@ -25,7 +26,8 @@ nickname: {
  },
  
  currentCondition: {
- type: String
+ type: String,
+ enum: ['Thriving','Needs some attention','Not good condition']
  },
  
  apiId : {
