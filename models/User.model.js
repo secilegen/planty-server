@@ -1,3 +1,4 @@
+
 const { Schema, model } = require("mongoose");
 
 // TODO: Please make sure you edit the User model to whatever makes sense in this case
@@ -38,6 +39,15 @@ lastName: {
   },
 profileImage:{
   type: String
+},
+
+companyName:{
+  type: String
+},
+typeOfCompany: {
+  type: String,
+  enum: ['Restaurant', 'Café', 'Bar', 'Hotel', 'Office', 'Other']
+
 }
 }
 );

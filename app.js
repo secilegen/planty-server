@@ -23,13 +23,21 @@ const indexRoutes = require("./routes/index.routes");
 app.use("/api", indexRoutes);
 
 const authRoutes = require("./routes/auth.routes");
-app.use("/auth", authRoutes)
+
+app.use("/auth", authRoutes);
+
+const userRoutes = require("./routes/user.routes");
+app.use("/api", userRoutes);
+
+const expertRoutes = require("./routes/expert.routes");
+app.use("/api", expertRoutes);
 
 const plantRoutes = require("./routes/plant.routes");
 app.use("/api", plantRoutes)
 
 const bookingRoutes = require("./routes/booking.routes");
 app.use("/api", bookingRoutes)
+
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
