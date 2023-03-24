@@ -35,6 +35,6 @@ const bookingSchema = new Schema (
     
     }
 )
-const Booking = model("Expert", bookingSchema);
+const Booking = model("Booking", bookingSchema);
 
 module.exports = Booking;
