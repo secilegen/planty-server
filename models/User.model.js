@@ -37,9 +37,12 @@ type: String
 lastName: {
   type: String
   },
-profileImage:{
-  type: String
-},
+
+  image: {
+    type: String
+  },
+
+  
 
 companyName:{
   type: String
