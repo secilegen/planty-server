@@ -22,7 +22,7 @@ const bookingSchema = new Schema (
     
     
     isOnline: {
-    type: Boolean,
+    type: String,
     required: [true, "Please select the location: online or face-to-face"]
     },
     
