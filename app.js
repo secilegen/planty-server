@@ -38,6 +38,9 @@ app.use("/api", plantRoutes)
 const bookingRoutes = require("./routes/booking.routes");
 app.use("/api", bookingRoutes)
 
+const diseaseRoutes = require("./routes/disease.routes");
+app.use("/api", diseaseRoutes)
+
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
