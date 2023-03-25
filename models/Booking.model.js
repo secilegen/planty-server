@@ -20,6 +20,7 @@ const bookingSchema = new Schema (
      ref: "Expert"
     },
     
+    
     isOnline: {
     type: Boolean,
     required: [true, "Please select the location: online or face-to-face"]
