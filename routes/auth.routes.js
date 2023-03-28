@@ -20,7 +20,7 @@ const saltRounds = 10;
 
 // POST /auth/signup  - Creates a new user in the database
 router.post("/signup", (req, res, next) => {
-  const { email, password, isCompany, firstName, lastName} = req.body;
+  const { email, password, isCompany, firstName, lastName, isExpert} = req.body;
   console.log(req.body)
   // Check if email or password or name are provided as empty strings
   if (email === "" || password === "" || isCompany === "") {
@@ -47,7 +47,6 @@ router.post("/signup", (req, res, next) => {
 
   // Check the users collection if a user with the same email already exists
   let memberFindOne, memberCreate
-  let isExpert = true;
 
   isExpert ? memberFindOne = Expert.findOne({email}) : memberFindOne = User.findOne({ email })
   
@@ -84,7 +83,7 @@ router.post("/signup", (req, res, next) => {
 
 // POST  /auth/login - Verifies email and password and returns a JWT
 router.post("/login", (req, res, next) => {
-  const { email, password } = req.body;
+  const { email, password, isExpert } = req.body;
 
   // Check if email or password are provided as empty string
   if (email === "" || password === "") {
@@ -92,8 +91,7 @@ router.post("/login", (req, res, next) => {
     return;
   }
 
-  let memberFindOne, memberCreate
-  let isExpert = true;
+  let memberFindOne
 
   isExpert ? memberFindOne = Expert.findOne({email}) : memberFindOne = User.findOne({ email })
   
