@@ -3,12 +3,12 @@ const { Schema, model } = require("mongoose");
 const expertSchema = new Schema({
   firstName: {
     type: String,
-    required: [true, "Name is required"],
+    // required: [true, "Name is required"],
   },
 
   lastName: {
     type: String,
-    required: [true, "Name is required"],
+    // required: [true, "Name is required"],
   },
 
   email: {
@@ -18,10 +18,9 @@ const expertSchema = new Schema({
     match: [/^\S+@\S+\.\S+$/, "Please use a valid email address"],
     trim: true,
   },
-  passwordHash: {
+  hashedPassword: {
     type: String,
-    required: [true, "Password is required"],
-    unique: true,
+    required: [true, "Password is required"]
   },
 
   profileImage: {
@@ -30,7 +29,7 @@ const expertSchema = new Schema({
 
   experienceLevel: {
     type: String,
-    required: [true, "Experience level is required"],
+    // required: [true, "Experience level is required"],
     enum: ["1-3 years", "4-6 years", "more than 6 years"],
   },
 
@@ -42,12 +41,12 @@ const expertSchema = new Schema({
 
   availability: {
     type: Boolean,
-    required: [true, "Availability is required"],
+    // required: [true, "Availability is required"],
   },
 
-  isOnline: {
+  availableOnline: {
     type: Boolean,
-    required: [true, "Please select online or offline"],
+    // required: [true, "Please select online or offline"],
   },
 
   expertLocation: {
@@ -56,7 +55,7 @@ const expertSchema = new Schema({
 
   price: {
     type: Number,
-    required: [true, "Price is required"],
+    // required: [true, "Price is required"],
   },
 
   booking: [

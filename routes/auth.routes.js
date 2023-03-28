@@ -9,6 +9,8 @@ const jwt = require("jsonwebtoken");
 
 // Require the User model in order to interact with the database
 const User = require("../models/User.model");
+const Expert = require("../models/Expert.model");
+
 
 // Require necessary (isAuthenticated) middleware in order to control access to specific routes
 const { isAuthenticated } = require("../middleware/jwt.middleware.js");
@@ -18,7 +20,7 @@ const saltRounds = 10;
 
 // POST /auth/signup  - Creates a new user in the database
 router.post("/signup", (req, res, next) => {
-  const { email, password, isCompany} = req.body;
+  const { email, password, isCompany, firstName, lastName} = req.body;
   console.log(req.body)
   // Check if email or password or name are provided as empty strings
   if (email === "" || password === "" || isCompany === "") {
@@ -44,8 +46,13 @@ router.post("/signup", (req, res, next) => {
   }
 
   // Check the users collection if a user with the same email already exists
-  User.findOne({ email })
-    .then((foundUser) => {
+  let memberFindOne, memberCreate
+  let isExpert = true;
+
+  isExpert ? memberFindOne = Expert.findOne({email}) : memberFindOne = User.findOne({ email })
+  
+  // User.findOne({ email })
+  memberFindOne.then((foundUser) => {
       // If the user with the same email already exists, send an error response
       if (foundUser) {
         res.status(400).json({ message: "User already exists." });
@@ -58,7 +65,8 @@ router.post("/signup", (req, res, next) => {
 
       // Create the new user in the database
       // We return a pending promise, which allows us to chain another `then`
-      return User.create({ email, hashedPassword: hashedPassword, isCompany:isCompany });
+      (isExpert) ? memberCreate = Expert.create({email, hashedPassword: hashedPassword, firstName, lastName}) : User.create({ email, hashedPassword: hashedPassword, isCompany:isCompany, firstName, lastName })
+      return memberCreate;
     })
     .then((createdUser) => {
       // Deconstruct the newly created user object to omit the password
@@ -84,8 +92,13 @@ router.post("/login", (req, res, next) => {
     return;
   }
 
+  let memberFindOne, memberCreate
+  let isExpert = true;
+
+  isExpert ? memberFindOne = Expert.findOne({email}) : memberFindOne = User.findOne({ email })
+  
   // Check the users collection if a user with the same email exists
-  User.findOne({ email })
+  memberFindOne
     .then((foundUser) => {
       if (!foundUser) {
         // If the user is not found, send an error response

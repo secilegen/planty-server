@@ -59,7 +59,7 @@ router.get('/expert/:id', (req, res, next) => {
     }
    
     Expert.findByIdAndRemove(id)
-      .then(() => res.json({ message: `Project with ${id} is removed successfully.` }))
+      .then(() => res.json({ message: `Expert with ${id} is removed successfully.` }))
       .catch(error => res.json(error));
   });
 
