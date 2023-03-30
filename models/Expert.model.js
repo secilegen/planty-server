@@ -58,6 +58,11 @@ const expertSchema = new Schema({
     // required: [true, "Price is required"],
   },
 
+  isExpert:{
+    type: Boolean,
+    default: true
+  },
+
   booking: [
     {
       type: Schema.Types.ObjectId,
