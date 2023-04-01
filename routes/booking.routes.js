@@ -2,13 +2,23 @@ const router = require("express").Router();
 const mongoose = require("mongoose")
 
 const Booking = require('../models/Booking.model')
+const User = require('../models/User.model')
 
 //  POST /api/get-support  -  Creates a new booking for the user
 router.post("/get-support", (req, res, next) => {
+  let bookingGlobal
     const {description, reasonWhy, user, expert, isOnline, isConfirmed, rating } = req.body;
   
     Booking.create({ description, reasonWhy, user, expert, isOnline, isConfirmed, rating })
-      .then((response) => res.json(response))
+      .then((response) => {
+        bookingGlobal = response._id
+        return User.findByIdAndUpdate(user, {$push:{bookings:bookingGlobal}})
+      }
+      )
+      .then((response) => {
+        res.json(response)
+      })
+     
       .catch((err) => res.json(err));
   });
 
@@ -54,8 +64,10 @@ router.get("/get-support/:id", (req, res, next) => {
 //     .catch((err) => res.json(err));
 // });
   
-  // PUT  /api/get-support/edit/:id  -  Edit one booking by Id
-  router.put("/get-support/edit/:id", (req, res, next) => {
+  // PUT  /api/get-support/:id  -  Edit one booking by Id
+  router.put("/get-support/:id", (req, res, next) => {
+
+
     const { id } = req.params;
   
     if (!mongoose.Types.ObjectId.isValid(id)) {
