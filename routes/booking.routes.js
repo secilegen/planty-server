@@ -47,9 +47,26 @@ router.get("/get-support/:id", (req, res, next) => {
       .then((booking) => res.status(200).json(booking))
       .catch((err) => res.json(err));
   });
+
+  //  GET /api/get-support/edit/:id -  GEts the specific booking by Id and edit
+// router.get("/get-support/edit/:id", (req, res, next) => {
+//   const { id } = req.params;
+
+//   if (!mongoose.Types.ObjectId.isValid(id)) {
+//     res.status(400).json({ message: "Specified id is not valid" });
+//     return;
+//   }
+
+//   Booking.findById(id)
+//     .populate("user")
+//     .populate("expert")
+//     .then((booking) => res.status(200).json(booking))
+//     .catch((err) => res.json(err));
+// });
   
   // PUT  /api/get-support/:id  -  Edit one booking by Id
   router.put("/get-support/:id", (req, res, next) => {
+
 
     const { id } = req.params;
   
