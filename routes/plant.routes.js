@@ -6,9 +6,9 @@ const Plant = require('../models/Plant.model')
 
 //  POST /api/plants  -  Creates a new plant for the user
 router.post("/plants", (req, res, next) => {
-    const {nickname, sunlightPositioning, image, plantHeight, birthDate, currentCondition, apiId, user, disease } = req.body;
+    const {common_name, watering, imageAPI, nickname, sunlightPositioning, image, plantHeight, birthDate, currentCondition, apiId, user, disease } = req.body;
   
-    Plant.create({ nickname, sunlightPositioning, image, plantHeight, birthDate, currentCondition, apiId, user, disease })
+    Plant.create({ common_name, watering, imageAPI, nickname, sunlightPositioning, image, plantHeight, birthDate, currentCondition, apiId, user, disease })
       .then((response) => res.json(response))
       .catch((err) => res.json(err));
   });
@@ -19,6 +19,7 @@ router.get("/plants", (req, res, next) => {
     //   .populate("user")
       .populate("disease")
       .then((plants) => res.json(plants))
+
       .catch((err) => res.json(err));
   });
 
@@ -33,8 +34,8 @@ router.get("/plants/:plantId", (req, res, next) => {
     }
   
     Plant.findById(plantId)
-    //   .populate("user")
-    //   .populate("disease")
+    .populate("user")
+    .populate("disease")
       .then((plant) => res.status(200).json(plant))
       .catch((err) => res.json(err));
   });

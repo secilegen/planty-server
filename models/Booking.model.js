@@ -23,7 +23,9 @@ const bookingSchema = new Schema (
     
     isOnline: {
     type: String,
-    required: [true, "Please select the location: online or face-to-face"]
+    required: [true, "Please select the location: online or face-to-face"],
+    enum: ["Online", "Offline"]
+
     },
     
     isConfirmed: {
