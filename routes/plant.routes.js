@@ -3,13 +3,25 @@ const router = require("express").Router();
 const mongoose = require("mongoose")
 
 const Plant = require('../models/Plant.model')
+const User = require('../models/User.model')
 
 //  POST /api/plants  -  Creates a new plant for the user
 router.post("/plants", (req, res, next) => {
+  let plantGlobal 
+
     const {common_name, watering, imageAPI, nickname, sunlightPositioning, image, plantHeight, birthDate, currentCondition, apiId, user, disease } = req.body;
   
     Plant.create({ common_name, watering, imageAPI, nickname, sunlightPositioning, image, plantHeight, birthDate, currentCondition, apiId, user, disease })
-      .then((response) => res.json(response))
+      .then((response) => {
+        plantGlobal = response._id
+        return User.findByIdAndUpdate(user, {$push:{myPlants:plantGlobal}})
+        
+      }
+     )
+     .then((response) => {
+      res.json(response)
+     })
+
       .catch((err) => res.json(err));
   });
 
