@@ -23,7 +23,7 @@ router.get("/get-support", (req, res, next) => {
 
 
 //  GET /api/get-support/:id -  GEts the specific booking by Id
-router.get("/get-support/:Id", (req, res, next) => {
+router.get("/get-support/:id", (req, res, next) => {
     const { id } = req.params;
   
     if (!mongoose.Types.ObjectId.isValid(id)) {

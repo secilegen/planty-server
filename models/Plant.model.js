@@ -3,6 +3,19 @@ const { Schema, model } = require("mongoose");
 
 const plantSchema = new Schema (
 {
+
+common_name: {
+    type: String
+},
+
+watering: {
+    type: String
+},
+
+imageAPI: {
+    type: String
+},
+
 nickname: {
  type: String,
  required: [true, "Nickname for your plant is required"],
@@ -16,6 +29,7 @@ nickname: {
  image: {
  type: String,
  },
+ 
  
  plantHeight: {
  type: Number,
