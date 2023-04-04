@@ -7,7 +7,7 @@ const diseaseSchema = new Schema (
     required: [true, "Name of disease is required"]
     },
     symptoms: {
-    type: [String]
+    type: String
     },
     treatment: {
     type: String
@@ -19,8 +19,13 @@ const diseaseSchema = new Schema (
     type: Boolean
     },
     supplements: {
-    type: [String]
+    type: String
     },
+
+    image: {
+        type: String
+    },
+
     hosts: [{
     type: Schema.Types.ObjectId,
      ref: "Plant"

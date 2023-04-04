@@ -7,7 +7,8 @@ const bookingSchema = new Schema (
     },
     
     reasonWhy: {
-    type: String
+    type: String,
+    enum: ['Plant Positioning', 'Support with Disease', 'Plant Concept']
     },
     
     user: {
