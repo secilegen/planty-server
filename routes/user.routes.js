@@ -9,7 +9,9 @@ const User = require('../models/User.model')
     const { email, hashedPassword, isCompany, firstName,lastName, profileImage, companyName, typeOfCompany } = req.body;
    
     User.create({ email, hashedPassword, isCompany, firstName,lastName, profileImage, companyName, typeOfCompany })
-      .then(response => res.json(response))
+      .then(response => {
+        console.log('This is the response to user create:', response)
+        res.json(response)})
       .catch(err => res.json(err));
   });
 
