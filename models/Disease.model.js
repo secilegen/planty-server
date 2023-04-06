@@ -4,7 +4,6 @@ const diseaseSchema = new Schema (
 {
     name: {
     type: String,
-    required: [true, "Name of disease is required"]
     },
     symptoms: {
     type: String

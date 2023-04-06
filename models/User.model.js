@@ -31,10 +31,10 @@ const userSchema = new Schema({
     default: false,
   },
 
-  isCompany: {
-    type: Boolean,
-    required: [true, "User type is required"],
-  },
+  // isCompany: {
+  //   type: Boolean,
+  //   required: [true, "User type is required"],
+  // },
 
   companyName: {
     type: String,
