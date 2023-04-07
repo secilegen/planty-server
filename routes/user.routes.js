@@ -9,9 +9,9 @@ const fileUploader = require("../config/cloudinary.config");
 
  //  POST /api/user  -  Creates a new user Question: route /user or /user/:id
  router.post('/user', (req, res, next) => {
-    const { email, hashedPassword, isCompany, firstName,lastName, profileImage, companyName, typeOfCompany } = req.body;
+    const { email, hashedPassword, isCompany, firstName,lastName, profileImage, companyName, typeOfCompany, image } = req.body;
    
-    User.create({ email, hashedPassword, isCompany, firstName,lastName, profileImage, companyName, typeOfCompany })
+    User.create({ email, hashedPassword, isCompany, firstName,lastName, profileImage, companyName, typeOfCompany, image })
       .then(response => {
         console.log('This is the response to user create:', response)
         res.json(response)})
