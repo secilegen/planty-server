@@ -4,6 +4,9 @@ const User = require('../models/User.model')
 // const Booking = require('../models/Booking.model')
 // const Plant = require('../models/Plant.model') 
 
+// ********* require fileUploader in order to use it *********
+const fileUploader = require("../config/cloudinary.config");
+
  //  POST /api/user  -  Creates a new user Question: route /user or /user/:id
  router.post('/user', (req, res, next) => {
     const { email, hashedPassword, isCompany, firstName,lastName, profileImage, companyName, typeOfCompany } = req.body;
@@ -15,6 +18,20 @@ const User = require('../models/User.model')
       .catch(err => res.json(err));
   });
 
+  // POST "/api/upload" => Route that receives the image, sends it to Cloudinary via the fileUploader and returns the image URL
+router.post("/upload", fileUploader.single("imageUrl"), (req, res, next) => {
+  // console.log("file is: ", req.file)
+ 
+  if (!req.file) {
+    next(new Error("No file uploaded!"));
+    return;
+  }
+  
+  // Get the URL of the uploaded file and send it as a response.
+  // 'fileUrl' can be any name, just make sure you remember to use the same when accessing it on the frontend
+  
+  res.json({ fileUrl: req.file.path });
+});
 
 //  GET /api/user/:id - Returns user profile
 
