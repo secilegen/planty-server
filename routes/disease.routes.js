@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const mongoose = require("mongoose")
 const Disease = require('../models/Disease.model')
 const Plant = require('../models/Plant.model')
 
@@ -25,6 +26,19 @@ router.get("/disease/:id", (req, res, next) => {
     .catch((err) => res.json(err));
 });  
 
+router.put("/disease/:plantId", (req, res, next) => {
+  const { plantId } = req.params
+  const {disease} = req.body
+  console.log("put method disease", req.body.disease)
+  console.log("plant id", plantId)
+
+  Plant.findByIdAndUpdate(plantId, {$push:{disease}}, { new: true })
+      .then((editedPlant) => res.json(editedPlant))
+      .catch((err) => res.json(err));
+
+
+})
+
 //  POST /api/disease  -  Creates a new disease with relationship to plant for the user
 router.post("/disease", (req, res, next) => {
  const {name, symptoms, treatment, recoveryTime, isContagious, supplements, image } = req.body;
@@ -36,6 +50,7 @@ router.post("/disease", (req, res, next) => {
       )
      .catch((err) => res.json(err));
   });
+
 
   // PUT Add disease to plant
 
@@ -51,5 +66,6 @@ router.post("/disease", (req, res, next) => {
   
   
   })
+
 
   module.exports = router;
