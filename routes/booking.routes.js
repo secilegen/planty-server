@@ -20,7 +20,6 @@ router.post("/get-support", (req, res, next) => {
       )
       .then((response)=>{
         console.log('Response after pushing the booking to user', response)
-        bookingGlobal = response.data.bookings.at(-1)._id
         return (Expert.findByIdAndUpdate(expert, {$push:{booking:bookingGlobal}}))
 
       })
