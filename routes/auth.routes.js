@@ -21,7 +21,7 @@ const saltRounds = 10;
 // POST /auth/signup  - Creates a new user in the database
 router.post("/signup", (req, res, next) => {
   const { email, password, isCompany, firstName, lastName, isExpert} = req.body;
-  console.log(req.body)
+  console.log("Req.body is", req.body)
   // Check if email or password or name are provided as empty strings
   if (email === "" || password === "" || isCompany === "") {
     res.status(400).json({ message: "Provide email, password and company information " });
@@ -46,7 +46,7 @@ router.post("/signup", (req, res, next) => {
   }
 
   // Check the users collection if a user with the same email already exists
-  let memberFindOne, memberCreate
+  let memberFindOne
 
   isExpert ? memberFindOne = Expert.findOne({email}) : memberFindOne = User.findOne({ email })
   
@@ -64,12 +64,20 @@ router.post("/signup", (req, res, next) => {
 
       // Create the new user in the database
       // We return a pending promise, which allows us to chain another `then`
-      (isExpert) ? memberCreate = Expert.create({email, hashedPassword: hashedPassword, firstName, lastName}) : User.create({ email, hashedPassword: hashedPassword, isCompany:isCompany, firstName, lastName })
+      if (isExpert) {
+        return Expert.create({email, hashedPassword: hashedPassword, firstName, lastName})
+      }
+      else {
+        return User.create({ email, hashedPassword: hashedPassword, firstName, lastName })
+      }
+      // (isExpert) ? memberCreate = Expert.create({email, hashedPassword: hashedPassword, firstName, lastName}) : User.create({ email, hashedPassword: hashedPassword, firstName, lastName })
+      console.log("Member create is:", memberCreate)
       return memberCreate;
     })
     .then((createdUser) => {
       // Deconstruct the newly created user object to omit the password
       // We should never expose passwords publicly
+      console.log('Created user is:', createdUser)
       const { email, _id } = createdUser;
 
       // Create a new object that doesn't expose the password

@@ -51,6 +51,21 @@ router.post("/disease", (req, res, next) => {
      .catch((err) => res.json(err));
   });
 
+
+  // PUT Add disease to plant
+
+  router.put("/disease/:plantId", (req, res, next) => {
+    const { plantId } = req.params
+    const {disease} = req.body
+    console.log("put method disease", req.body.disease)
+    console.log("plant id", plantId)
   
+    Plant.findByIdAndUpdate(plantId, {$push:{disease}}, { new: true })
+        .then((editedPlant) => res.json(editedPlant))
+        .catch((err) => res.json(err));
+  
+  
+  })
+
 
   module.exports = router;
