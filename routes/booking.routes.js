@@ -4,9 +4,6 @@ const mongoose = require("mongoose")
 const Booking = require('../models/Booking.model')
 const User = require('../models/User.model')
 
-console.log('Hello')
-
-
 //  POST /api/get-support  -  Creates a new booking for the user
 router.post("/get-support", (req, res, next) => {
   let bookingGlobal

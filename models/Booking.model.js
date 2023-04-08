@@ -30,7 +30,8 @@ const bookingSchema = new Schema (
     },
     
     isConfirmed: {
-    type: Boolean,
+    type: String,
+    enum: ["pending", "accepted", "rejected"]
     },
     
     rating: {

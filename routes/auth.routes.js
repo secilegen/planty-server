@@ -81,7 +81,7 @@ router.post("/signup", (req, res, next) => {
       const { email, _id } = createdUser;
 
       // Create a new object that doesn't expose the password
-      const user = { email, _id };
+      const user = { email, _id};
 
       // Send a json response containing the user object
       res.status(201).json({ user: user });
@@ -117,10 +117,10 @@ router.post("/login", (req, res, next) => {
 
       if (passwordCorrect) {
         // Deconstruct the user object to omit the password
-        const { _id, email, isOnline } = foundUser;
+        const { _id, email, isOnline, isExpert, firstName } = foundUser;
 
         // Create an object that will be set as the token payload
-        const payload = { _id, email, isOnline };
+        const payload = { _id, email, isOnline, isExpert, firstName };
 
         // Create a JSON Web Token and sign it
         const authToken = jwt.sign(payload, process.env.TOKEN_SECRET, {
