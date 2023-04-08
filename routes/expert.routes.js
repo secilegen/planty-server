@@ -50,7 +50,16 @@ router.get('/expert/:id', (req, res, next) => {
       .then(user => res.status(200).json(user))
       .catch(error => res.json(error));
   });
+
+  // GET experts  
+  router.get('/expert/', (req, res, next) => {
    
+    Expert.find()
+      .populate('booking')
+      .then(experts => res.json(experts))
+      .catch(error => res.json(error));
+  });
+
    
   // PUT  /api/expert/:id  -  Update/Edit expert
   router.put('/expert/:id', (req, res, next) => {
