@@ -10,7 +10,7 @@ router.post("/plants", (req, res, next) => {
 
 
     const {common_name, watering, imageAPI, nickname, sunlightPositioning, image, plantHeight, birthDate, currentCondition, apiId, user, disease } = req.body;
-  
+
     Plant.create({ common_name, watering, imageAPI, nickname, sunlightPositioning, image, plantHeight, birthDate, currentCondition, apiId, user, disease })
       .then((response) => {
         plantGlobal = response._id
