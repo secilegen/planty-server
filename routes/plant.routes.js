@@ -82,6 +82,8 @@ router.get("/plants/:plantId", (req, res, next) => {
       .then((editedPlant) => res.json(editedPlant))
       .catch((err) => res.json(err));
   });
+
+  
   
   // DELETE  /api/plants/:plantId  -  Deletes a plant by id
   router.delete("/plants/:plantId", (req, res, next) => {

@@ -3,9 +3,7 @@ const mongoose = require("mongoose")
 
 const Booking = require('../models/Booking.model')
 const User = require('../models/User.model')
-
-console.log('Hello')
-
+const Expert = require('../models/Expert.model')
 
 //  POST /api/get-support  -  Creates a new booking for the user
 router.post("/get-support", (req, res, next) => {
@@ -15,13 +13,20 @@ router.post("/get-support", (req, res, next) => {
     Booking.create({ description, reasonWhy, user, expert, isOnline, isConfirmed, rating })
       .then((response) => {
         bookingGlobal = response._id
-        return User.findByIdAndUpdate(user, {$push:{bookings:bookingGlobal}})
+        return (
+          User.findByIdAndUpdate(user, {$push:{bookings:bookingGlobal}})
+        )
       }
       )
+      .then((response)=>{
+        console.log('Response after pushing the booking to user', response)
+        return (Expert.findByIdAndUpdate(expert, {$push:{booking:bookingGlobal}}))
+
+      })
       .then((response) => {
         res.json(response)
+        console.log(response)
       })
-     
       .catch((err) => res.json(err));
   });
 
