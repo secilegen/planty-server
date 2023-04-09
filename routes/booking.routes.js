@@ -8,9 +8,9 @@ const Expert = require('../models/Expert.model')
 //  POST /api/get-support  -  Creates a new booking for the user
 router.post("/get-support", (req, res, next) => {
   let bookingGlobal
-    const {description, reasonWhy, user, expert, isOnline, isConfirmed, rating } = req.body;
+    const {description, reasonWhy, user, expert, isOnline, isConfirmed, rating, image } = req.body;
   
-    Booking.create({ description, reasonWhy, user, expert, isOnline, isConfirmed, rating })
+    Booking.create({ description, reasonWhy, user, expert, isOnline, isConfirmed, rating, image })
       .then((response) => {
         bookingGlobal = response._id
         return (
