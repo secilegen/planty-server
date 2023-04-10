@@ -63,7 +63,7 @@ const expertSchema = new Schema({
     default: true
   },
 
-  booking: [
+  bookings: [
     {
       type: Schema.Types.ObjectId,
       ref: "Booking",
