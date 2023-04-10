@@ -46,7 +46,7 @@ router.get('/expert/:id', (req, res, next) => {
     // We use .populate() method to get swap the `_id`s for the actual Task documents
     // Two populates because of two dependencies?
     Expert.findById(id)
-      .populate('booking')
+      .populate('bookings')
       .then(user => res.status(200).json(user))
       .catch(error => res.json(error));
   });
@@ -55,7 +55,7 @@ router.get('/expert/:id', (req, res, next) => {
   router.get('/expert/', (req, res, next) => {
    
     Expert.find()
-      .populate('booking')
+      .populate('bookings')
       .then(experts => res.json(experts))
       .catch(error => res.json(error));
   });
