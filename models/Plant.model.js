@@ -37,7 +37,7 @@ nickname: {
  },
  
  birthDate: {
- type: Date
+ type: String
  },
  
  currentCondition: {
