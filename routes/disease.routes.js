@@ -52,26 +52,8 @@ router.post("/disease", (req, res, next) => {
   });
 
 
-  // // PUT Add disease to plant
 
-  // router.put("/disease/:plantId", (req, res, next) => {
-  //   const { plantId } = req.params
-  //   const {disease} = req.body
-  //   console.log("put method disease", req.body.disease)
-  //   console.log("plant id", plantId)
-  
-  //   Plant.findByIdAndUpdate(plantId, {$push:{disease}}, { new: true })
-  //       .then((editedPlant) => res.json(editedPlant))
-  //       .catch((err) => res.json(err));
-  
-  
-  // })
-
-
-
-
-  // DELETE remove disease // or use the same rout. Condition if exists pull, if not push
-  // findByIdAndUpdate line 48-50 changing to pull. using id from frontend // change to disease
+  // DELETE remove disease 
 
   router.put("/disease/:plantId/delete", (req, res, next) => {
     const { plantId } = req.params;
