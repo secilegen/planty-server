@@ -29,6 +29,11 @@ const bookingSchema = new Schema (
 
     },
     
+    date: {
+    type: String,
+    required: [true, "Please select the date"],
+    },
+
     isConfirmed: {
     type: String,
     enum: ["pending", "accepted", "rejected"]
