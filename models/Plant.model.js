@@ -57,7 +57,6 @@ nickname: {
  
  disease: [{
  type: Schema.Types.ObjectId,
- unique: [true, "You can't add multiple diseases of the same type"],
   ref: "Disease"
  }],
 }

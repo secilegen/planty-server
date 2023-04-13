@@ -22,7 +22,7 @@ const diseaseSchema = new Schema (
     },
 
     image: {
-        type: String
+    type: String
     },
 
     hosts: [{

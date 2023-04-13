@@ -43,9 +43,7 @@ const bookingSchema = new Schema (
     type: Number
     },
 
-    image: {
-        type: String
-    }
+   
     
     }
 )

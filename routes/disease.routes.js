@@ -32,7 +32,7 @@ router.put("/disease/:plantId", (req, res, next) => {
   console.log("put method disease", req.body)
   console.log("plant id", plantId)
 
-  Plant.findByIdAndUpdate(plantId, {$push:{disease}}, { new: true })
+  Plant.findByIdAndUpdate(plantId, {$addToSet:{disease}}, { new: true })
       .then((editedPlant) => res.json(editedPlant))
       .catch((err) => res.json(err));
 
